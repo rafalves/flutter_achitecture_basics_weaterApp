@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_architecture_basics/app/controllers/app_controller.dart';
+import 'package:flutter_architecture_basics/app/app_controller.dart';
 
 class CustomSwitchWidget extends StatefulWidget {
   const CustomSwitchWidget({Key? key}) : super(key: key);
@@ -9,7 +9,7 @@ class CustomSwitchWidget extends StatefulWidget {
 }
 
 class _CustomSwitchWidgetState extends State<CustomSwitchWidget> {
-  bool status = AppController.instance.themeSwitch.value;
+  bool status = AppController.instance.isDark;
 
   @override
   Widget build(BuildContext context) {

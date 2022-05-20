@@ -1,7 +1,7 @@
 import 'package:flutter_architecture_basics/app/interfaces/client_http_interface.dart';
 import 'package:dio/dio.dart';
 
-class ClientHttp implements IClientHttp {
+class ClientHttpService implements IClientHttp {
   final Dio dio = Dio();
 
   @override

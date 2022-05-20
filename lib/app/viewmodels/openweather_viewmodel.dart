@@ -11,7 +11,11 @@ class OpenWeatherViewModel {
     required this.repository,
   });
 
-  fill() async {
-    openWeatherModel.value = await repository.getWeather();
+  Future fill() async {
+    try {
+      openWeatherModel.value = await repository.getWeather();
+    } catch (e) {
+      print(e);
+    }
   }
 }

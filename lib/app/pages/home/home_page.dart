@@ -17,7 +17,7 @@ class _HomePageState extends State<HomePage> {
   final controller = HomeController(
     viewModel: OpenWeatherViewModel(
       repository: OpenWeatherRepository(
-        client: ClientHttp(),
+        client: ClientHttpService(),
       ),
     ),
   );
@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home Page'),
+        title: const Text('Weather'),
         centerTitle: true,
         actions: const [
           Icon(Icons.lightbulb),
@@ -34,19 +34,26 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       body: Center(
-        child: Column(
-          children: [
-            ValueListenableBuilder<OpenWeatherModel?>(
-              valueListenable: controller.weather,
-              builder: (context, value, child) {
-                if (value == null) {
-                  return const Text('Clique em carregar Clima');
-                } else {
-                  return Text(value.main!.temp.toString());
-                }
-              },
-            ),
-          ],
+        child: ValueListenableBuilder<OpenWeatherModel?>(
+          valueListenable: controller.weather,
+          builder: (context, value, child) {
+            if (value == null) {
+              return const Text('Clique em carregar Clima');
+            } else {
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(value.name!,
+                      style: Theme.of(context).textTheme.headline4),
+                  const SizedBox(height: 20),
+                  Text(value.main!.temp.toString() + ' ⁰C',
+                      style: Theme.of(context).textTheme.headline5),
+                  Image.network(
+                      'http://openweathermap.org/img/wn/${value.weather![0].icon}@2x.png')
+                ],
+              );
+            }
+          },
         ),
       ),
       floatingActionButton: FloatingActionButton(
